@@ -654,9 +654,12 @@ class SupersetAppInitializer:
                 hdr = {'Authorization': 'Bearer ' + user_key}
 
                 req = urllib.request.Request(url, headers=hdr)
-                response = urllib.request.urlopen(req)
+                try:
+                    response = urllib.request.urlopen(req)
+                except urllib.error.HTTPError as e:
+                    return ''
+
                 data = json.loads(response.read().decode('utf-8'))
-                print(data)
 
                 if response.getcode() != 200:
                     print('response code', response.getcode)
