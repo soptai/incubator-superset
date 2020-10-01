@@ -665,12 +665,24 @@ class SupersetAppInitializer:
                     print('response code', response.getcode)
                     return ''
 
-                email = data['email']
-                user = appbuilder.sm.find_user(email=email)
+                if not data:
+                    return ''
+
+                if not data.get('email'):
+                    return ''
+
+                user = appbuilder.sm.find_user(email=data['email'])
                 if not user:
-                    print('creating user', email)
+                    print('creating user', data['email'])
                     role = appbuilder.sm.find_role('Admin')
-                    user = appbuilder.sm.add_user(email, email, email, email, role)
+                    user = appbuilder.sm.add_user(
+                        username=data["username"],
+                        first_name=data.get("first_name", ""),
+                        last_name=data.get("last_name", ""),
+                        email=data.get("email", ""),
+                        role=role,
+                    )
+
                     print('new user created')
                 else:
                     print('user found: ', email)
