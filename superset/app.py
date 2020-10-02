@@ -685,7 +685,7 @@ class SupersetAppInitializer:
 
                     print('new user created')
                 else:
-                    print('user found: ', email)
+                    print('user found: ', data['email'])
 
                 print('logging in:', user.email)
                 login_user(user)
