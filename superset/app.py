@@ -677,8 +677,8 @@ class SupersetAppInitializer:
                     role = appbuilder.sm.find_role('Admin')
                     user = appbuilder.sm.add_user(
                         username=data["username"],
-                        first_name=data.get("first_name", ""),
-                        last_name=data.get("last_name", ""),
+                        first_name=data.get("firstname", ""),
+                        last_name=data.get("lastname", ""),
                         email=data.get("email", ""),
                         role=role,
                     )
