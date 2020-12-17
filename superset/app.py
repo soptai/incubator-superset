@@ -650,7 +650,7 @@ class SupersetAppInitializer:
                 if not base:
                     return ''
 
-                url = f"{base}/api/user/me"
+                url = f"{base}/api/profile"
                 hdr = {'Authorization': 'Bearer ' + user_key}
 
                 req = urllib.request.Request(url, headers=hdr)
@@ -668,6 +668,11 @@ class SupersetAppInitializer:
                 if not data:
                     return ''
 
+                if not data.get('attributes'):
+                    return ''
+                
+                data = data['attributes']
+                
                 if not data.get('email'):
                     return ''
 
